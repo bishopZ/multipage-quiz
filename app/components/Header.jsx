@@ -8,7 +8,7 @@ if (process.env.BROWSER) {
 let Title = function () {
   return (
     <header className='header--main'>
-      <h1>BausCode</h1>
+      <h1>Multi Page Quiz</h1>
       <Nav />
     </header>
   );

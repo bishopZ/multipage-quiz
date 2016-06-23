@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class Counter extends Component {
+class Begin extends Component {
   render () {
     const { increment, decrement, counter } = this.props;
 
@@ -14,10 +14,10 @@ class Counter extends Component {
   }
 }
 
-Counter.propTypes = {
+Begin.propTypes = {
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired
 };
 
-export default Counter;
+export default Begin;
