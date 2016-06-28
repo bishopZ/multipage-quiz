@@ -51,6 +51,10 @@ var config = {
       {
         test: /\.(eot|woff|woff2|ttf|svg)$/, 
         loader: 'url?limit=20000'
+      },
+      { 
+        test: /\.json$/, 
+        loader: 'json-loader' 
       }
     ]
   },
