@@ -1,0 +1,51 @@
+[
+  {
+    "question": "Pick one",
+    "choices": 1,
+    "answers": [
+      {
+        "text": "Hunter",
+        "boost": "S,P,W,C"
+      }, {
+        "text": "Fighter",
+        "boost": "T,D,R,M,V"
+      }
+    ]
+  }, {
+    "question": "Pick one",
+    "choices": 1,
+    "answers": [
+      {
+        "text": "Sensing",
+        "boost": "T,S,W,C"
+      }, {
+        "text": "Intuitive",
+        "boost": "D,P,R,M,V"
+      }
+    ]
+  }, {
+    "question": "Pick one",
+    "choices": 1,
+    "answers": [
+      {
+        "text": "Might",
+        "boost": "T,D,M,C"
+      }, {
+        "text": "Magic",
+        "boost": "S,P,R,W,V"
+      }
+    ]
+  }, {
+    "question": "Pick one",
+    "choices": 1,
+    "answers": [
+      {
+        "text": "Team",
+        "boost": "R,W,M,C,V"
+      }, {
+        "text": "Champion",
+        "boost": "T,S,D,P"
+      }
+    ]
+  }
+]

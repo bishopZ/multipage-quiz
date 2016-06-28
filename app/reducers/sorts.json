@@ -1,0 +1,78 @@
+[
+  {
+    "question": "Pick three colors",
+    "choices": 3,
+    "answers": [
+      {
+        "color": "red",
+        "boost": "T"
+      },{
+        "color": "black",
+        "boost": "S"
+      },{
+        "color": "white",
+        "boost": "D"
+      },{
+        "color": "#eaed97",
+        "boost": "P"
+      },{
+        "color": "green",
+        "boost": "R"
+      },{
+        "color": "blue",
+        "boost": "W"
+      },{
+        "color": "orange",
+        "boost": "M"
+      },{
+        "color": "purple",
+        "boost": "C"
+      },{
+        "color": "yellow",
+        "boost": "V"
+      }
+    ]
+  },{
+    "question": "Pick two spirit animals",
+    "choices": 2,
+    "answers": [
+      {
+        "text": "Tiger",
+        "boost": "T,D"
+      },{
+        "text": "Snake",
+        "boost": "S,P"
+      },{
+        "text": "Spider",
+        "boost": "R"
+      },{
+        "text": "Wolf",
+        "boost": "W"
+      },{
+        "text": "Mongoose",
+        "boost": "M"
+      },{
+        "text": "Crane",
+        "boost": "C"
+      }
+    ]
+  },{
+    "question": "Pick a mythical creature",
+    "choices": 1,
+    "answers": [
+      {
+        "text": "Dragon",
+        "boost": "T,D"
+      },{
+        "text": "Phoenix",
+        "boost": "S,P"
+      },{
+        "text": "Werewolf",
+        "boost": "R,M"
+      },{
+        "text": "Frankenstein",
+        "boost": "W,C"
+      }
+    ]
+  }
+]
