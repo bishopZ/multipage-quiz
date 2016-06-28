@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import begin from './begin';
+import { counter, quiz, sorters } from 'reducers/quiz';
 
 const rootReducer = combineReducers({
-  counter: begin
+  counter,
+  quiz,
+  sorters
 });
 
 export default rootReducer;
