@@ -18,9 +18,9 @@ class QuestionCard extends Component {
     $('body').removeClass('modal-open'); // For scroll run
     $('.modal').modal('hide'); 
   }
-  transition() {
+  transition(event) {
     const action = this.props.action;
-    action();
+    action($(event.currentTarget).text());
   }
   render() {
     const questionData = this.props.question;
