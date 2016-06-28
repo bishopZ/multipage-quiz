@@ -15,7 +15,7 @@ class Main extends Component {
       var question = quiz[progress.questionNumber];
       Card = <QuestionCard question={question} action={advance} />;
     }
-    debugger;
+
     return (
       <div className='page-content'>
         {Card}
