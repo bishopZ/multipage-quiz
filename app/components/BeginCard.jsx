@@ -4,10 +4,16 @@ import React, {PropTypes, Component} from 'react';
 
 class BeginCard extends Component {
   componentDidMount () {
+    // best way to require bootstrap
     if (!$.modal) {
       require('bootstrap');
     }
     $('.modal').modal({show: true, backdrop: 'static'});
+  }
+  componentWillUnmount(){
+    $('.modal-backdrop').hide(); // for black background
+    $('body').removeClass('modal-open'); // For scroll run
+    $('.modal').modal('hide'); 
   }
   transition() {
     const action = this.props.action;

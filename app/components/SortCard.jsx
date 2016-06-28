@@ -1,11 +1,10 @@
-// legacy loading for bootstrap
 var $ = global.$ = global.jQuery = require('jquery');
 
 import React, {PropTypes, Component} from 'react';
 import '../helpers/underscore.shuffle.js';
 import _ from 'underscore';
 
-class QuestionCard extends Component {
+class SortCard extends Component {
   componentDidMount () {
     // best way to require bootstrap
     if (!$.modal) {
@@ -23,18 +22,18 @@ class QuestionCard extends Component {
     action();
   }
   render() {
-    const questionData = this.props.question;
+    const sorterData = this.props.sorter;
 
     var transition = this.transition.bind(this);
-    var answerButtons = _.shuffle(questionData.answers).map(function(answer, index){
-      return <button key={index} onClick={transition} type="button" className="btn btn-default">{answer.text}</button>;
+    var answerButtons = _.shuffle(sorterData.answers).map(function(answer, index){
+      return <button style={{color: answer.text}} key={index} onClick={transition} className="btn btn-default" type="button">{answer.text}</button>;
     });
     return (
       <div className="modal fade" tabIndex="-1" role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-body">
-              <h4>{questionData.question}</h4>
+              <h4>{sorterData.question}</h4>
             </div>
             <div className="modal-footer">
               {answerButtons}
@@ -46,9 +45,9 @@ class QuestionCard extends Component {
   }
 }
 
-QuestionCard.propTypes = {
-  question: PropTypes.object.isRequired,
+SortCard.propTypes = {
+  sorter: PropTypes.object.isRequired,
   action: PropTypes.func.isRequired
 };
 
-export default QuestionCard;
+export default SortCard;

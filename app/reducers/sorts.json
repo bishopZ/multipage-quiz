@@ -4,31 +4,31 @@
     "choices": 3,
     "answers": [
       {
-        "color": "red",
+        "text": "red",
         "boost": "T"
       },{
-        "color": "black",
+        "text": "black",
         "boost": "S"
       },{
-        "color": "white",
+        "text": "white",
         "boost": "D"
       },{
-        "color": "#eaed97",
+        "text": "#eaed97",
         "boost": "P"
       },{
-        "color": "green",
+        "text": "green",
         "boost": "R"
       },{
-        "color": "blue",
+        "text": "blue",
         "boost": "W"
       },{
-        "color": "orange",
+        "text": "orange",
         "boost": "M"
       },{
-        "color": "purple",
+        "text": "purple",
         "boost": "C"
       },{
-        "color": "yellow",
+        "text": "yellow",
         "boost": "V"
       }
     ]

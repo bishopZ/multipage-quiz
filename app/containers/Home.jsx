@@ -2,18 +2,22 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as QuizActions from '../actions/quiz';
 import React, { Component, PropTypes } from 'react';
+import SortCard from '../components/SortCard.jsx';
 import QuestionCard from '../components/QuestionCard.jsx';
 import BeginCard from '../components/BeginCard.jsx';
 
 class Main extends Component {
   render () {
-    const { quiz, progress, advance, begin } = this.props;
+    const { quiz, sorters, progress, advance, begin } = this.props;
     
     var Card = <BeginCard action={begin} />;
     
     if (progress.section === 'questions') {
       var question = quiz[progress.questionNumber];
       Card = <QuestionCard question={question} action={advance} />;
+    } else if (progress.section === 'sort') {
+      var sorter = sorters[0];
+      Card = <SortCard sorter={sorter} action={advance} />;
     }
 
     return (
