@@ -1,7 +1,7 @@
 import questions from './quiz.json';
 import sortQuestions from './sorts.json';
 
-import { ADVANCE } from '../actions/quiz';
+import { BEGIN, ADVANCE } from '../actions/quiz';
 
 import '../helpers/underscore.shuffle.js';
 import _ from 'underscore';
@@ -14,10 +14,26 @@ export function sorters(state = _.shuffle(sortQuestions)){
   return state;
 }
 
-export function progress(state = 'begin', action){
+const progressDefaults = { 
+  section: 'begin',
+  questionNumber: 0
+};
+
+export function progress(state = progressDefaults, action){
   switch(action.type) {
+  case BEGIN:
+    return _.extend({}, state, {section:'questions'});
   case ADVANCE: 
-    return 'step1';
+    switch(state.section) {
+    case 'questions': 
+      var nextIndex = ++state.questionNumber;
+      if (nextIndex < questions.length) {
+        return _.extend({}, state, {questionNumber:nextIndex});
+      }
+      return _.extend({}, state, {section:'sort', questionNumber:0});
+    case 'sort': 
+      return _.extend({}, state, {section:'sort'});
+    }
   }
   return state;
 }

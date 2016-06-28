@@ -3,15 +3,19 @@ import { connect } from 'react-redux';
 import * as QuizActions from '../actions/quiz';
 import React, { Component, PropTypes } from 'react';
 import QuestionCard from '../components/QuestionCard.jsx';
+import BeginCard from '../components/BeginCard.jsx';
 
 class Main extends Component {
   render () {
-    const { quiz, progress, advance } = this.props;
-    var Card = <QuestionCard question={quiz[0]} advance={advance} />;
-    console.log(progress);
-    if (progress !== 'begin') {
-      Card = <QuestionCard question={quiz[1]} advance={advance} />;
+    const { quiz, progress, advance, begin } = this.props;
+    
+    var Card = <BeginCard action={begin} />;
+    
+    if (progress.section === 'questions') {
+      var question = quiz[progress.questionNumber];
+      Card = <QuestionCard question={question} action={advance} />;
     }
+    debugger;
     return (
       <div className='page-content'>
         {Card}
@@ -21,10 +25,14 @@ class Main extends Component {
 }
 
 Main.propTypes = {
+  begin: PropTypes.func.isRequired,
   advance: PropTypes.func.isRequired,
   quiz: PropTypes.array.isRequired,
   sorters: PropTypes.array.isRequired,
-  progress: PropTypes.string.isRequired
+  progress: PropTypes.shape({
+    section: PropTypes.string.isRequired,
+    questionNumber: PropTypes.number.isRequired
+  }).isRequired
 };
 
 function mapStateToProps(state) {

@@ -1,7 +1,14 @@
+export const BEGIN = 'BEGIN';
 export const ADVANCE = 'ADVANCE';
 
-export function advance() {
+export function begin() {
   return {
-    type: ADVANCE
+    type: BEGIN
+  };
+}
+export function advance(boost) {
+  return {
+    type: ADVANCE,
+    boost: boost
   };
 }
