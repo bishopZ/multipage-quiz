@@ -2,16 +2,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as QuizActions from '../actions/quiz';
 import React, { Component, PropTypes } from 'react';
-import Title from '../components/Home/Title.jsx';
-import Description from '../components/Home/Description.jsx';
+import QuestionCard from '../components/QuestionCard.jsx';
 
 class Main extends Component {
   render () {
-    const { increment, decrement, counter, quiz, sorters } = this.props;
+    const { increment, decrement, counter, quiz } = this.props;
     return (
       <div className='page-content'>
-        <Title question={quiz[0].question} />
-        <Description question={sorters[0].question} />
+        <QuestionCard question={quiz[0]} />
         <div className="counter">
           <h1>{counter}</h1>
           <button onClick={increment}>Increase</button>
