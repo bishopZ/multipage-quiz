@@ -1,6 +1,8 @@
 var $ = global.$ = global.jQuery = require('jquery');
 
 import React, {PropTypes, Component} from 'react';
+import '../helpers/underscore.shuffle.js';
+import _ from 'underscore';
 
 class QuestionCard extends Component {
   componentDidMount () {
@@ -14,7 +16,7 @@ class QuestionCard extends Component {
   render() {
     const questionData = this.props.question;
     var transition = this.transition.bind(this);
-    var answerButtons = questionData.answers.map(function(answer, index){
+    var answerButtons = _.shuffle(questionData.answers).map(function(answer, index){
       return <button key={index} onClick={transition} type="button" className="btn btn-default">{answer.text}</button>;
     });
     return (
