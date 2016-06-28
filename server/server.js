@@ -47,8 +47,7 @@ module.exports = {
           res.redirect(302, redirectLocation.pathname + redirectLocation.search);
         }
         else if (renderProps) {
-          let html = renderToString(<RouterContext {...renderProps} />);
-          res.status(200).render('main', {env: env, content: html});
+          res.status(200).render('main', {env: env});
         }
         else {
           res.status(404).render('404');
