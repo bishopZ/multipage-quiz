@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { counter, quiz, sorters } from 'reducers/quiz';
+import { counter, quiz, sorters } from './quiz';
 
 const rootReducer = combineReducers({
   counter,
