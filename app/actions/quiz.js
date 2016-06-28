@@ -1,14 +1,7 @@
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const ADVANCE = 'ADVANCE';
 
-export function increment() {
+export function advance() {
   return {
-    type: INCREMENT_COUNTER
-  };
-}
-
-export function decrement() {
-  return {
-    type: DECREMENT_COUNTER
+    type: ADVANCE
   };
 }

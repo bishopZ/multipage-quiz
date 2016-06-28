@@ -7,10 +7,15 @@ class QuestionCard extends Component {
     require('bootstrap');
     $('.modal').modal({show: true, backdrop: 'static'});
   }
+  transition() {
+    const advance = this.props.advance;
+    advance();
+  }
   render() {
     const questionData = this.props.question;
-    var answerButtons = questionData.answers.map(function(answer){
-      return <button type="button" className="btn btn-default">{answer.text}</button>;
+    var transition = this.transition.bind(this);
+    var answerButtons = questionData.answers.map(function(answer, index){
+      return <button key={index} onClick={transition} type="button" className="btn btn-default">{answer.text}</button>;
     });
     return (
       <div className="modal fade" tabIndex="-1" role="dialog">
@@ -30,7 +35,8 @@ class QuestionCard extends Component {
 }
 
 QuestionCard.propTypes = {
-  question: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired,
+  advance: PropTypes.func.isRequired
 };
 
 export default QuestionCard;

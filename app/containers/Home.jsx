@@ -6,33 +6,32 @@ import QuestionCard from '../components/QuestionCard.jsx';
 
 class Main extends Component {
   render () {
-    const { increment, decrement, counter, quiz } = this.props;
+    const { quiz, progress, advance } = this.props;
+    var Card = <QuestionCard question={quiz[0]} advance={advance} />;
+    console.log(progress);
+    if (progress !== 'begin') {
+      Card = <QuestionCard question={quiz[1]} advance={advance} />;
+    }
     return (
       <div className='page-content'>
-        <QuestionCard question={quiz[0]} />
-        <div className="counter">
-          <h1>{counter}</h1>
-          <button onClick={increment}>Increase</button>
-          <button onClick={decrement}>Decrease</button>
-        </div>
+        {Card}
       </div>
     );
   }
 }
 
 Main.propTypes = {
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
-  counter: PropTypes.number.isRequired,
+  advance: PropTypes.func.isRequired,
   quiz: PropTypes.array.isRequired,
-  sorters: PropTypes.array.isRequired
+  sorters: PropTypes.array.isRequired,
+  progress: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter,
     quiz: state.quiz,
-    sorters: state.sorters
+    sorters: state.sorters,
+    progress: state.progress
   };
 }
 
