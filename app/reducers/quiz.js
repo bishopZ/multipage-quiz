@@ -1,5 +1,6 @@
 import questions from './quiz.json';
 import sortQuestions from './sorts.json';
+import matches from './matches.json';
 
 import { BEGIN, ADVANCE, SORT_SELECTION } from '../actions/quiz';
 
@@ -24,21 +25,29 @@ var boosts = {};
 const progressDefaults = { 
   section: 'begin',
   questionNumber: 0,
+  currentSort: 0,
   boosts: _.extend({}, boostDefaults),
-  selections: []
+  selections: [],
+  match: {}
 };
 
 function changeState(state, update){
-  return _.extend({}, state, update);
+  return _.extend(
+    {}, 
+    progressDefaults, 
+    state, 
+    update, 
+    {boosts: boosts}
+  );
 }
 
 function doBoost(state, boostString){
-  var boostMap = _.extend({}, state.boosts);
-  var boosts = boostString.split(',');
-  boosts.forEach(function(boost){
-    ++boostMap[boost];
+  var outputMap = _.extend({}, boosts);
+  var boostUpdates = boostString.split(',');
+  boostUpdates.forEach(function(boost){
+    ++outputMap[boost];
   });
-  return boostMap;
+  boosts = outputMap;
 }
 
 // Exports
@@ -57,7 +66,9 @@ export function progress(state = progressDefaults, action){
   
   case BEGIN:
     boosts = _.extend({}, boostDefaults);
-    return changeState(state, {section:'questions', boosts: boosts});
+    return changeState({}, {
+      section:'questions'
+    });
   
   case ADVANCE:   
     // render boosts
@@ -67,7 +78,7 @@ export function progress(state = progressDefaults, action){
         return answer.text === action.boost;
       });
       if (answer) {
-        boosts = doBoost(state, answer.boost);
+        doBoost(state, answer.boost);
         console.log(boosts);
       }
     }
@@ -75,39 +86,71 @@ export function progress(state = progressDefaults, action){
     var nextIndex = ++state.questionNumber;
     if (nextIndex < questions.length) {
       return changeState(state, {
-        questionNumber: nextIndex, 
-        boosts: boosts
+        questionNumber: nextIndex
       });
     }
     // or if all the questions are done
     return changeState(state, {
       section: 'sort', 
-      questionNumber: 0, 
-      boosts: boosts,
-      selections: []
+      questionNumber: 0,
+      selections: [],
+      match: {}
     });
     
   case SORT_SELECTION: 
     var selections = state.selections.concat([action.select]);
-
-    if (selections.length < sortData[0].choices) {
+    if (selections.length < sortData[state.currentSort].choices) {
       return changeState(state, {
         section: 'sort',
         selections: selections
       });
     }
     // else, apply boosts
+    console.log(selections);
+
     var boostArray = selections.map(function(selection){
-      var answer = _.find(sortData[0].answers, function(answer){
+      var answer = _.find(sortData[state.currentSort].answers, function(answer){
         return answer.text === selection;
       });
       return answer.boost;
     });
-    boosts = doBoost(state, boostArray.join(','));
-    console.log(boosts);
+    doBoost(state, boostArray.join(','));
+    
+    console.log(boosts); 
 
-    // TODO: attempt match
+    // attempt match
+    var topBoost = _.reduce(boosts, function(max, current, key) {
+      return max && max.value > current ? max : {
+        value: current,
+        key: key
+      };
+    });
+    var match = matches[topBoost.key];
 
+    if (topBoost.value > 4) {
+      // render completion screen
+      return changeState(state, {
+        section: 'match',
+        selections: [],
+        match: match
+      });
+    } else {
+      // no match yet, keep sorting them
+      if (state.currentSort + 1 < sortData.length) {
+        return changeState(state, {
+          section: 'sort',
+          selections: [],
+          currentSort: state.currentSort + 1
+        });
+      } else {
+        // just render the best match
+        return changeState(state, {
+          section: 'match',
+          selections: [],
+          match: match
+        });
+      }
+    }
   }
   return state;
 }

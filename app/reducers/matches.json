@@ -1,0 +1,47 @@
+{
+	"T": {
+		"essence": "fire",
+		"color": "red",
+		"powers": "resistance to fire, ice and lightening"
+	},
+	"S": {
+		"essence": "void",
+		"color": "black",
+		"powers": "chance to take half damage, causes dizzy"
+	},
+	"D": {
+		"essence": "essence",
+		"color": "white",
+		"powers": "magnetize targets, chance to counter-attack"
+	},
+	"P": {
+		"essence": "sunlight",
+		"color": "tan",
+		"powers": "blast defenses, immune to psychic attacks, rebirth"
+	},
+	"R": {
+		"essence": "growth/earth",
+		"color": "green",
+		"powers": "gains power when attacked, heal allies"
+	},
+	"W": {
+		"essence": "water",
+		"color": "blue",
+		"powers": "gains luck when attacked, seduction"
+	},
+	"M": {
+		"essence": "wind",
+		"color": "orange",
+		"powers": "healing factor, immune to fear, causes confusion"
+	},
+	"C": {
+		"essence": "aether",
+		"color": "purple",
+		"powers": "absorb opponent's power, change shape"
+	},
+	"C": {
+		"essence": "love",
+		"color": "yellow",
+		"powers": "summon gypsies, land art, lounge"
+	}
+}

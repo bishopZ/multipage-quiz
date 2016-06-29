@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import SortCard from '../components/SortCard.jsx';
 import QuestionCard from '../components/QuestionCard.jsx';
 import BeginCard from '../components/BeginCard.jsx';
+import MatchCard from '../components/MatchCard.jsx';
 
 class Main extends Component {
   render () {
@@ -16,8 +17,10 @@ class Main extends Component {
       var question = quiz[progress.questionNumber];
       Card = <QuestionCard question={question} action={advance} />;
     } else if (progress.section === 'sort') {
-      var sorter = sorters[0];
+      var sorter = sorters[progress.currentSort];
       Card = <SortCard sorter={sorter} selections={progress.selections} action={sortSelection} />;
+    } else if (progress.section === 'match') {
+      Card = <MatchCard action={begin} match={progress.match} />;
     }
 
     return (
@@ -36,7 +39,9 @@ Main.propTypes = {
   sorters: PropTypes.array.isRequired,
   progress: PropTypes.shape({
     section: PropTypes.string.isRequired,
-    questionNumber: PropTypes.number.isRequired
+    questionNumber: PropTypes.number,
+    selectons: PropTypes.array,
+    match: PropTypes.object
   }).isRequired
 };
 

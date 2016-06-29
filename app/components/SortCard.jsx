@@ -5,6 +5,9 @@ import '../helpers/underscore.shuffle.js';
 import _ from 'underscore';
 
 class SortCard extends Component {
+  componentDidUpdate() {
+    $('button').blur();    
+  }
   componentDidMount () {
     // best way to require bootstrap
     if (!$.modal) {
@@ -31,7 +34,11 @@ class SortCard extends Component {
       if (selections.indexOf(answer.text) !== -1) {
         classNames += ' btn-primary disabled';
       }
-      return <button style={{color: answer.text}} key={index} onClick={transition} className={classNames} type="button">{answer.text}</button>;
+      var styles = {};
+      if (sorterData.question.indexOf('color') !== -1) {
+        styles = {color: answer.text};
+      }
+      return <button style={styles} key={index} onClick={transition} className={classNames} type="button">{answer.text}</button>;
     });
     return (
       <div className="modal fade" tabIndex="-1" role="dialog">

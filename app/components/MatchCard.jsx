@@ -1,16 +1,10 @@
-// legacy loading for bootstrap
 var $ = global.$ = global.jQuery = require('jquery');
 
 import React, {PropTypes, Component} from 'react';
-import '../helpers/underscore.shuffle.js';
-import _ from 'underscore';
 
-class QuestionCard extends Component {
-  componentDidUpdate() {
-    $('button').blur();    
-  }
+class MatchCard extends Component {
   componentDidMount () {
-    // best way to require bootstrap
+    // best way to require bootstrap, afaik
     if (!$.modal) {
       require('bootstrap');
     }
@@ -21,26 +15,25 @@ class QuestionCard extends Component {
     $('body').removeClass('modal-open'); // For scroll run
     $('.modal').modal('hide'); 
   }
-  transition(event) {
+  transition() {
     const action = this.props.action;
-    action($(event.currentTarget).text());
+    action();
   }
   render() {
-    const questionData = this.props.question;
-
     var transition = this.transition.bind(this);
-    var answerButtons = _.shuffle(questionData.answers).map(function(answer, index){
-      return <button key={index} onClick={transition} type="button" className="btn btn-default">{answer.text}</button>;
-    });
+    var match = this.props.match;
     return (
       <div className="modal fade" tabIndex="-1" role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-body">
-              <h4>{questionData.question}</h4>
+              <h4>Your Character</h4>
+              <h5><span className="attr-title">Essence: </span>{match.essence}</h5>
+              <h5><span className="attr-title">Color: </span>{match.color}</h5>
+              <h5><span className="attr-title">Powers: </span>{match.powers}</h5>
             </div>
             <div className="modal-footer">
-              {answerButtons}
+              <button onClick={transition} type="button" className="btn btn-default">Pick Again!</button>
             </div>
           </div>
         </div>
@@ -49,9 +42,13 @@ class QuestionCard extends Component {
   }
 }
 
-QuestionCard.propTypes = {
-  question: PropTypes.object.isRequired,
-  action: PropTypes.func.isRequired
+MatchCard.propTypes = {
+  action: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    essence: PropTypes.string,
+    color: PropTypes.string,
+    powers: PropTypes.string
+  }).isRequired
 };
 
-export default QuestionCard;
+export default MatchCard;
