@@ -41,13 +41,27 @@ function changeState(state, update){
   );
 }
 
-function doBoost(state, boostString){
+function doBoost(state, boostString, modifier = 1){
   var outputMap = _.extend({}, boosts);
   var boostUpdates = boostString.split(',');
   boostUpdates.forEach(function(boost){
-    ++outputMap[boost];
+    outputMap[boost] += modifier;
   });
   boosts = outputMap;
+}
+
+function attemptMatch(boosts){
+  var topBoost = _.reduce(boosts, function(max, current, key) {
+    return max && max.value > current ? max : {
+      value: current,
+      key: key
+    };
+  });
+  var match = matches[topBoost.key];
+  return {
+    match: match,
+    top: topBoost
+  };
 }
 
 // Exports
@@ -78,8 +92,8 @@ export function progress(state = progressDefaults, action){
         return answer.text === action.boost;
       });
       if (answer) {
-        doBoost(state, answer.boost);
-        console.log(boosts);
+        doBoost(state, answer.boost, 1.4);
+        // console.log(boosts);
       }
     }
     // set up next question
@@ -90,6 +104,17 @@ export function progress(state = progressDefaults, action){
       });
     }
     // or if all the questions are done
+    // attempt match
+    var matchData = attemptMatch(boosts);
+    if (Math.round(matchData.top.value) > 4) {
+      // render completion screen
+      return changeState(state, {
+        section: 'match',
+        selections: [],
+        match: matchData.match
+      });
+    }
+    // or move on to sorters
     return changeState(state, {
       section: 'sort', 
       questionNumber: 0,
@@ -106,7 +131,7 @@ export function progress(state = progressDefaults, action){
       });
     }
     // else, apply boosts
-    console.log(selections);
+    // console.log(selections);
 
     var boostArray = selections.map(function(selection){
       var answer = _.find(sortData[state.currentSort].answers, function(answer){
@@ -114,43 +139,34 @@ export function progress(state = progressDefaults, action){
       });
       return answer.boost;
     });
-    doBoost(state, boostArray.join(','));
+    doBoost(state, boostArray.join(','), 1);
     
     console.log(boosts); 
 
     // attempt match
-    var topBoost = _.reduce(boosts, function(max, current, key) {
-      return max && max.value > current ? max : {
-        value: current,
-        key: key
-      };
-    });
-    var match = matches[topBoost.key];
-
-    if (topBoost.value > 4) {
+    var matchDataAfterSort = attemptMatch(boosts);
+    if (Math.round(matchDataAfterSort.top.value) > 4) {
       // render completion screen
       return changeState(state, {
         section: 'match',
         selections: [],
-        match: match
+        match: matchDataAfterSort.match
       });
-    } else {
-      // no match yet, keep sorting them
-      if (state.currentSort + 1 < sortData.length) {
-        return changeState(state, {
-          section: 'sort',
-          selections: [],
-          currentSort: state.currentSort + 1
-        });
-      } else {
-        // just render the best match
-        return changeState(state, {
-          section: 'match',
-          selections: [],
-          match: match
-        });
-      }
-    }
+    } 
+    // no match yet, keep sorting them
+    if (state.currentSort + 1 < sortData.length) {
+      return changeState(state, {
+        section: 'sort',
+        selections: [],
+        currentSort: state.currentSort + 1
+      });
+    } 
+    // just render the best match
+    return changeState(state, {
+      section: 'match',
+      selections: [],
+      match: matchDataAfterSort.match
+    });
   }
   return state;
 }
