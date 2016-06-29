@@ -1,8 +1,6 @@
 var $ = global.$ = global.jQuery = require('jquery');
 
 import React, {PropTypes, Component} from 'react';
-import '../helpers/underscore.shuffle.js';
-import _ from 'underscore';
 
 class SortCard extends Component {
   componentDidUpdate() {
@@ -29,7 +27,7 @@ class SortCard extends Component {
     const selections = this.props.selections;
 
     var transition = this.transition.bind(this);
-    var answerButtons = _.shuffle(sorterData.answers).map(function(answer, index){
+    var answerButtons = sorterData.answers.map(function(answer, index){
       var classNames = 'btn btn-default';
       if (selections.indexOf(answer.text) !== -1) {
         classNames += ' btn-primary disabled';

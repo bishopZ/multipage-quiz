@@ -28,7 +28,7 @@ class MatchCard extends Component {
           <div className="modal-content">
             <div className="modal-body">
               <h4>Your Character</h4>
-              <h5><span className="attr-title">Essence: </span>{match.essence}</h5>
+              <h5><span className="attr-title">Element: </span>{match.essence}</h5>
               <h5><span className="attr-title">Color: </span>{match.color}</h5>
               <h5><span className="attr-title">Powers: </span>{match.powers}</h5>
             </div>

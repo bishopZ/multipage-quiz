@@ -9,15 +9,15 @@ import _ from 'underscore';
 
 // Helpers
 var boostDefaults = {
-  T: 0,
-  S: 0,
-  D: 0,
-  P: 0,
-  R: 0,
-  W: 0,
-  M: 0,
+  V: 0,
   C: 0,
-  V: 0
+  M: 0,
+  W: 0,
+  R: 0,
+  P: 0,
+  D: 0,
+  S: 0,
+  T: 0
 };
 
 var boosts = {};
@@ -51,16 +51,21 @@ function doBoost(state, boostString, modifier = 1){
 }
 
 function attemptMatch(boosts){
-  var topBoost = _.reduce(boosts, function(max, current, key) {
-    return max && max.value > current ? max : {
-      value: current,
-      key: key
-    };
-  });
-  var match = matches[topBoost.key];
+  var maxValue = _.max(boosts);
+  var topKey = _.reduce(boosts, function(m, value, key){
+    if (value === maxValue) {
+      m = key;
+    }
+    return m;
+  }, false);
+  var match = matches[topKey];
+  console.log(topKey, maxValue);
   return {
     match: match,
-    top: topBoost
+    top: {
+      key: topKey,
+      value: maxValue
+    }
   };
 }
 
@@ -93,7 +98,7 @@ export function progress(state = progressDefaults, action){
       });
       if (answer) {
         doBoost(state, answer.boost, 1.4);
-        // console.log(boosts);
+        console.log(boosts);
       }
     }
     // set up next question
