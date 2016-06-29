@@ -1,7 +1,7 @@
 import questions from './quiz.json';
 import sortQuestions from './sorts.json';
 
-import { BEGIN, ADVANCE } from '../actions/quiz';
+import { BEGIN, ADVANCE, SORT_SELECTION } from '../actions/quiz';
 
 import '../helpers/underscore.shuffle.js';
 import _ from 'underscore';
@@ -19,10 +19,13 @@ var boostDefaults = {
   V: 0
 };
 
+var boosts = {};
+
 const progressDefaults = { 
   section: 'begin',
   questionNumber: 0,
-  boosts: _.extend({}, boostDefaults)
+  boosts: _.extend({}, boostDefaults),
+  selections: []
 };
 
 function changeState(state, update){
@@ -49,47 +52,62 @@ export function sorters(state = sortData){
   return state;
 }
 
-var boosts = {};
-
 export function progress(state = progressDefaults, action){
   switch(action.type) {
+  
   case BEGIN:
     boosts = _.extend({}, boostDefaults);
     return changeState(state, {section:'questions', boosts: boosts});
-  case ADVANCE: 
-    switch(state.section) {
-    case 'questions': 
-      // render boosts
-      if (action.boost) {
-        var prevQuestion = quizData[state.questionNumber];
-        var answer = _.find(prevQuestion.answers, function(answer){
-          return answer.text === action.boost;
-        });
-        if (answer) {
-          boosts = doBoost(state, answer.boost);
-          console.log(boosts);
-        }
-      }
-      // set up next question
-      var nextIndex = ++state.questionNumber;
-      if (nextIndex < questions.length) {
-        return changeState(state, {
-          questionNumber: nextIndex, 
-          boosts: boosts
-        });
-      }
-      // or if all the questions are done
-      return changeState(state, {
-        section:'sort', 
-        questionNumber: 0, 
-        boosts: boosts
+  
+  case ADVANCE:   
+    // render boosts
+    if (action.boost) {
+      var prevQuestion = quizData[state.questionNumber];
+      var answer = _.find(prevQuestion.answers, function(answer){
+        return answer.text === action.boost;
       });
-    case 'sort': 
+      if (answer) {
+        boosts = doBoost(state, answer.boost);
+        console.log(boosts);
+      }
+    }
+    // set up next question
+    var nextIndex = ++state.questionNumber;
+    if (nextIndex < questions.length) {
       return changeState(state, {
-        section:'sort', 
+        questionNumber: nextIndex, 
         boosts: boosts
       });
     }
+    // or if all the questions are done
+    return changeState(state, {
+      section: 'sort', 
+      questionNumber: 0, 
+      boosts: boosts,
+      selections: []
+    });
+    
+  case SORT_SELECTION: 
+    var selections = state.selections.concat([action.select]);
+
+    if (selections.length < sortData[0].choices) {
+      return changeState(state, {
+        section: 'sort',
+        selections: selections
+      });
+    }
+    // else, apply boosts
+    var boostArray = selections.map(function(selection){
+      var answer = _.find(sortData[0].answers, function(answer){
+        return answer.text === selection;
+      });
+      return answer.boost;
+    });
+    boosts = doBoost(state, boostArray.join(','));
+    console.log(boosts);
+
+    // TODO: attempt match
+
   }
   return state;
 }

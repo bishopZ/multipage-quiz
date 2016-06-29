@@ -17,16 +17,21 @@ class SortCard extends Component {
     $('body').removeClass('modal-open'); // For scroll run
     $('.modal').modal('hide'); 
   }
-  transition() {
+  transition(event) {
     const action = this.props.action;
-    action();
+    action($(event.currentTarget).text());
   }
   render() {
     const sorterData = this.props.sorter;
+    const selections = this.props.selections;
 
     var transition = this.transition.bind(this);
     var answerButtons = _.shuffle(sorterData.answers).map(function(answer, index){
-      return <button style={{color: answer.text}} key={index} onClick={transition} className="btn btn-default" type="button">{answer.text}</button>;
+      var classNames = 'btn btn-default';
+      if (selections.indexOf(answer.text) !== -1) {
+        classNames += ' btn-primary disabled';
+      }
+      return <button style={{color: answer.text}} key={index} onClick={transition} className={classNames} type="button">{answer.text}</button>;
     });
     return (
       <div className="modal fade" tabIndex="-1" role="dialog">
@@ -47,7 +52,8 @@ class SortCard extends Component {
 
 SortCard.propTypes = {
   sorter: PropTypes.object.isRequired,
-  action: PropTypes.func.isRequired
+  action: PropTypes.func.isRequired,
+  selections: PropTypes.array
 };
 
 export default SortCard;

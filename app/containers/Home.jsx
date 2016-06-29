@@ -8,7 +8,7 @@ import BeginCard from '../components/BeginCard.jsx';
 
 class Main extends Component {
   render () {
-    const { quiz, sorters, progress, advance, begin } = this.props;
+    const { quiz, sorters, progress, advance, begin, sortSelection } = this.props;
     
     var Card = <BeginCard action={begin} />;
     
@@ -17,7 +17,7 @@ class Main extends Component {
       Card = <QuestionCard question={question} action={advance} />;
     } else if (progress.section === 'sort') {
       var sorter = sorters[0];
-      Card = <SortCard sorter={sorter} action={advance} />;
+      Card = <SortCard sorter={sorter} selections={progress.selections} action={sortSelection} />;
     }
 
     return (
@@ -31,6 +31,7 @@ class Main extends Component {
 Main.propTypes = {
   begin: PropTypes.func.isRequired,
   advance: PropTypes.func.isRequired,
+  sortSelection: PropTypes.func.isRequired,
   quiz: PropTypes.array.isRequired,
   sorters: PropTypes.array.isRequired,
   progress: PropTypes.shape({
