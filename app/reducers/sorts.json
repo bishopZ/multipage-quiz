@@ -1,6 +1,6 @@
 [
   {
-    "question": "Pick three colors",
+    "question": "Select three colors that might represent your team",
     "choices": 3,
     "answers": [
       {
@@ -33,7 +33,7 @@
       }
     ]
   },{
-    "question": "Pick two spirit animals",
+    "question": "Select two spirit animals",
     "choices": 2,
     "answers": [
       {
@@ -57,7 +57,7 @@
       }
     ]
   },{
-    "question": "Pick a mythical creature",
+    "question": "Pick a mythical mentor",
     "choices": 1,
     "answers": [
       {

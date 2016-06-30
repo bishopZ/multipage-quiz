@@ -1,6 +1,6 @@
 [
   {
-    "question": "Pick one",
+    "question": "Select a role",
     "choices": 1,
     "answers": [
       {
@@ -12,39 +12,42 @@
       }
     ]
   }, {
-    "question": "Pick one",
+    "question": "Select a sense",
     "choices": 1,
     "answers": [
       {
-        "text": "Sensing",
+        "text": "Long Range Vision",
         "boost": "T,S,W,C"
       }, {
-        "text": "Intuitive",
+        "text": "Danger-sense",
         "boost": "D,P,R,M,V"
       }
     ]
   }, {
-    "question": "Pick one",
+    "question": "Select a weapon",
     "choices": 1,
     "answers": [
       {
-        "text": "Might",
+        "text": "Dagger",
         "boost": "T,D,M,C"
       }, {
-        "text": "Magic",
+        "text": "Spell Book",
         "boost": "S,P,R,W,V"
       }
     ]
   }, {
-    "question": "Pick one",
+    "question": "Select a bonus",
     "choices": 1,
     "answers": [
       {
         "text": "Team",
-        "boost": "R,W,M,C,V"
+        "boost": "R,W,C"
       }, {
         "text": "Champion",
-        "boost": "T,S,D,P"
+        "boost": "T,S,D"
+      }, {
+        "text": "Mixed",
+        "boost": "M,P,V"
       }
     ]
   }
