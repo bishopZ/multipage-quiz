@@ -8,6 +8,13 @@ import '../helpers/underscore.shuffle.js';
 import _ from 'underscore';
 
 // Helpers
+
+var initalLimit = 4;
+var answerMod = 1.3;
+var sortMod = 0.9;
+
+var boosts = {};
+
 var boostDefaults = {
   V: 0,
   C: 0,
@@ -19,8 +26,6 @@ var boostDefaults = {
   S: 0,
   T: 0
 };
-
-var boosts = {};
 
 const progressDefaults = { 
   section: 'begin',
@@ -97,7 +102,7 @@ export function progress(state = progressDefaults, action){
         return answer.text === action.boost;
       });
       if (answer) {
-        doBoost(state, answer.boost, 1.4);
+        doBoost(state, answer.boost, answerMod);
         console.log(boosts);
       }
     }
@@ -111,7 +116,7 @@ export function progress(state = progressDefaults, action){
     // or if all the questions are done
     // attempt match
     var matchData = attemptMatch(boosts);
-    if (Math.round(matchData.top.value) > 4) {
+    if (Math.round(matchData.top.value) > initalLimit) {
       // render completion screen
       return changeState(state, {
         section: 'match',
@@ -144,7 +149,7 @@ export function progress(state = progressDefaults, action){
       });
       return answer.boost;
     });
-    doBoost(state, boostArray.join(','), 1);
+    doBoost(state, boostArray.join(','), sortMod);
     
     console.log(boosts); 
 

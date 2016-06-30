@@ -4,11 +4,11 @@
     "choices": 1,
     "answers": [
       {
-        "text": "Hunter",
-        "boost": "S,P,W,C"
+        "text": "Ranger",
+        "boost": "S,P,W,C,V"
       }, {
         "text": "Fighter",
-        "boost": "T,D,R,M,V"
+        "boost": "T,D,R,M"
       }
     ]
   }, {
@@ -16,10 +16,10 @@
     "choices": 1,
     "answers": [
       {
-        "text": "Long Range Vision",
+        "text": "Long-range Vision",
         "boost": "T,S,W,C"
       }, {
-        "text": "Danger-sense",
+        "text": "Danger Sense",
         "boost": "D,P,R,M,V"
       }
     ]
@@ -29,10 +29,13 @@
     "answers": [
       {
         "text": "Dagger",
-        "boost": "T,D,M,C"
+        "boost": "T,D,C"
       }, {
         "text": "Spell Book",
-        "boost": "S,P,R,W,V"
+        "boost": "S,R,V"
+      }, {
+        "text": "Chalice",
+        "boost": "P,W,M"
       }
     ]
   }, {
