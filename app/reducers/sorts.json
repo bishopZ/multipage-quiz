@@ -1,35 +1,35 @@
 [
   {
-    "question": "Select three colors that might represent your team",
-    "choices": 3,
+    "question": "Select two colors that might represent your team",
+    "choices": 2,
     "answers": [
       {
         "text": "red",
-        "boost": "T"
+        "boost": "T,S"
       },{
         "text": "black",
-        "boost": "S"
+        "boost": "S,D"
       },{
         "text": "white",
         "boost": "D"
       },{
         "text": "#eaed97",
-        "boost": "P"
+        "boost": "P,C"
       },{
         "text": "green",
-        "boost": "R"
+        "boost": "R,W"
       },{
         "text": "blue",
-        "boost": "W"
+        "boost": "W,R"
       },{
         "text": "orange",
-        "boost": "M"
+        "boost": "M,T"
       },{
         "text": "purple",
-        "boost": "C"
+        "boost": "M,C"
       },{
         "text": "yellow",
-        "boost": "V"
+        "boost": "P,V"
       }
     ]
   },{
@@ -41,10 +41,10 @@
         "boost": "T,D"
       },{
         "text": "Snake",
-        "boost": "S,P"
+        "boost": "S"
       },{
         "text": "Spider",
-        "boost": "R"
+        "boost": "R,P"
       },{
         "text": "Wolf",
         "boost": "W"
@@ -53,7 +53,7 @@
         "boost": "M"
       },{
         "text": "Crane",
-        "boost": "C"
+        "boost": "C,V"
       }
     ]
   },{

@@ -10,8 +10,8 @@ import _ from 'underscore';
 // Helpers
 
 var initalLimit = 4;
-var answerMod = 1.3;
-var sortMod = 0.9;
+var answerMod = 1.35;
+var sortMod = 0.8;
 
 var boosts = {};
 

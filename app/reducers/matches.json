@@ -20,12 +20,12 @@
 		"powers": "blast defenses, immune to psychic attacks, rebirth"
 	},
 	"R": {
-		"essence": "growth/earth",
+		"essence": "growth & metal",
 		"color": "green",
-		"powers": "gains power when attacked, heal allies"
+		"powers": "gains power when attacked, heal nearby allies"
 	},
 	"W": {
-		"essence": "water",
+		"essence": "water & earth",
 		"color": "blue",
 		"powers": "gains luck when attacked, seduction"
 	},
@@ -37,11 +37,11 @@
 	"C": {
 		"essence": "aether",
 		"color": "purple",
-		"powers": "absorb opponent's power, change shape"
+		"powers": "absorbs opponent's power, shape-chager"
 	},
-	"C": {
+	"V": {
 		"essence": "love",
 		"color": "yellow",
-		"powers": "summon gypsies, land art, lounge"
+		"powers": "summon gypsies, land art"
 	}
 }

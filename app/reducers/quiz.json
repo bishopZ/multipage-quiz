@@ -5,7 +5,7 @@
     "answers": [
       {
         "text": "Ranger",
-        "boost": "S,P,W,C,V"
+        "boost": "S,P,W,C"
       }, {
         "text": "Fighter",
         "boost": "T,D,R,M"
@@ -17,10 +17,10 @@
     "answers": [
       {
         "text": "Long-range Vision",
-        "boost": "T,S,W,C"
+        "boost": "D,P,W,M,V"
       }, {
         "text": "Danger Sense",
-        "boost": "D,P,R,M,V"
+        "boost": "T,S,R,C"
       }
     ]
   }, {
@@ -35,7 +35,7 @@
         "boost": "S,R,V"
       }, {
         "text": "Chalice",
-        "boost": "P,W,M"
+        "boost": "P,W,M,R"
       }
     ]
   }, {
